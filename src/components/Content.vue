@@ -34,7 +34,7 @@ export default {
     },
     data() {
         return {
-        learningunit: [], // learningunit of learningunitById
+        learningunit: [], // its from learningunitById
         error: null
         }
     },

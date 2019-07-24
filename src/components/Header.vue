@@ -31,7 +31,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import { GET_LearningunitById } from "../queries"
+// import { GET_LearningunitById } from "../queries"
 
 export default {
   name: "header",
@@ -41,21 +41,21 @@ export default {
   computed: {
     ...mapGetters(["learningunits"]),
   },
-  apollo: {
-    learningunit: {
-      //graphql query
-      query: GET_LearningunitById,
-      error(error) {
-        this.error = JSON.stringify(error.message)
-      }
-    }
-  },
-  data() {
-    return {
-      learningunit: [], // learningunit of learningunitById
-      error: null
-    }
-  },
+  // apollo: {
+  //   learningunit: {
+  //     //graphql query
+  //     query: GET_LearningunitById,
+  //     error(error) {
+  //       this.error = JSON.stringify(error.message)
+  //     }
+  //   }
+  // },
+  // data() {
+  //   return {
+  //     learningunit: [], // learningunit of learningunitById
+  //     error: null
+  //   }
+  // },
   methods: {
     handleGetLearningunits() {
       // reach out to Vuex store, fire action that gets for learningunits

@@ -5,19 +5,23 @@ import { moduleA } from "./data/learningunitData";
 
 import { defaultClient as apolloClient } from "./main";
 
-import { GET_Learningunits } from "./queries";
+import { GET_Learningunits, GET_LearningunitById } from "./queries";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     learningunits: [],
+    learningunitById: {}
   },
 
   mutations: {
     setLearningunits: (state, payload) => {
       state.learningunits = payload;
     },
+    setLearningunitById: (state, payload) => {
+      state.learningunitById = payload;
+    }
   },
 
   actions: {
@@ -34,13 +38,27 @@ export default new Vuex.Store({
           console.error(err);
         });
     },
+    learningunit: ({ commit }) => {
+      apolloClient
+        .query({
+          query: GET_LearningunitById
+        })
+        .then(({ data }) => {
+          commit("setLearningunitById", data.learningunit);
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }
   },
 
   getters: {
-    learningunits: state => state.learningunits
+    learningunits: state => state.learningunits,
+    learningunitById: state => state.learningunitById 
   },
 
-  modules: {
-    a: moduleA
-  }
+  // modules: {
+  //   a: moduleA
+  // }
 });
