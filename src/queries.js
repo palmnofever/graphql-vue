@@ -3,7 +3,9 @@ import { gql } from "apollo-boost";
 /* Learningunits Queries */
 export const GET_Learningunits = gql`
   query {
-    showallLearningunits {
+    showallLearningunits (filter: {
+      limit: 2
+    }) {
       id
       title
       mc
@@ -18,7 +20,7 @@ export const GET_Learningunits = gql`
 /* QueryById */
 // export const GET_LearningunitById = gql`
 //   query learningunit($id: String) {
-//     learningunit(filter: { id_contains: $id }){
+//     learningunit(filter: { id: $id }){
 //       id
 //       title
 //       mc

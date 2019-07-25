@@ -1,27 +1,35 @@
 <template>
     <div>
+      <div class="search-box">
         <ul>
           <h3>data from showallLearningunits</h3>
-            <li v-for="learningunit in learningunits" :key="learningunit.id" >
-                {{ learningunit.title }}
-                {{ learningunit.id }}
+          <input type="text" v-model="search" placeholder="search blogs">
+            <li v-for="learningunit in filterdLearningunit" :key="learningunit.id" >
+                <strong> {{ learningunit.id }}  </strong> 
+                {{ learningunit.title }} -
+                {{ learningunit.mc }} - 
+                {{ learningunit.description }} -
+                {{ learningunit.createdAt }} -
+                {{ learningunit.updatedAt }}
             </li>
         </ul>
+      </div>
+
         <div>
-          <h3>data from learningunitById - {{ learningunit.id}}  </h3>
+          <h3>data from learningunitById - {{ learningunitById.id}}  </h3>
           <ul>
-            <li> {{ learningunit.title }} </li>
-            <li> {{ learningunit.url }}</li>
-            <li> {{ learningunit.mc }}</li>
-            <li> {{ learningunit.description }}</li>
-            <li> {{ learningunit.createdAt }}</li>
-            <li> {{ learningunit.updatedAt }}</li>
+            <li> {{ learningunitById.title }} </li>
+            <li> {{ learningunitById.url }}</li>
+            <li> {{ learningunitById.mc }}</li>
+            <li> {{ learningunitById.description }}</li>
+            <li> {{ learningunitById.createdAt }}</li>
+            <li> {{ learningunitById.updatedAt }}</li>
           </ul>
         </div> 
         <hr>
         <!-- <h2 v-if="$apollo.queries.learningunitById.loading">Loading...</h2> -->
-        <h3> {{ learningunit.title }} </h3>
-        <a v-bind:href = learningunit.url >
+        <h3> {{ learningunitById.title }} </h3>
+        <a v-bind:href = learningunitById.url >
             <p class="link-1">
                 The Open University - Team and Group Effectiveness
             </p>
@@ -35,11 +43,19 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "header",
-  created() {
-    this.handleGetLearningunits();
+  data() {
+    return {
+      search: ''
+    }
   },
   computed: {
     ...mapGetters(["learningunits"]),
+    ...mapGetters(["learningunitById"]),
+    filterdLearningunit: function() {
+      return this.learningunits.filter((learningunit) => {
+        return learningunit.id.match(this.search);
+      })
+    }
   },
   // apollo: {
   //   learningunit: {
@@ -56,18 +72,16 @@ export default {
   //     error: null
   //   }
   // },
-  methods: {
-    handleGetLearningunits() {
-      // reach out to Vuex store, fire action that gets for learningunits
-      this.$store.dispatch("showallLearningunits");
-    }
-  },
 };
 </script>
 
 <style scoped>
     .link-1{
         margin-bottom: 30px;
+    }
+    .search-box {
+      border: 1px solid black;
+      margin: 15px;
     }
 </style>
 

@@ -5,25 +5,25 @@
             A set of criteria to evaluate current team effectiveness to identify
             team-building needs
         </label>
+        <hr>
         <h1> {{learningunitById.title}} </h1>
+        <h3>data from showallLearningunits</h3>
+            <li v-for="learningunit in learningunits" :key="learningunit.id" >
+                {{ learningunit.title }}
+                {{ learningunit.id }}
+            </li>
     </div>
 </template>
 
 <script>
+//vuex method 
 import { mapGetters } from "vuex";
+
 export default {
-    name: "Upload",
-  created() {
-    this.handleGetLearningunits();
-  },
+  name: "Upload",
   computed: {
     ...mapGetters(["learningunitById"]),
-  },
-  methods: {
-    handleGetLearningunits() {
-      // reach out to Vuex store, fire action that gets for learningunits
-      this.$store.dispatch("learningunit");
-    }
+    ...mapGetters(["learningunits"]),
   },
 }
 </script>

@@ -10,7 +10,7 @@
                 <b-col cols="10">
                     <p class="top"><strong>Develop Team Effectiveness</strong></p>
                     <p class="mid">
-                        {{ learningunit.description }}
+                        {{ learningunitById.description | snippet }}
                     </p>
                 </b-col>
             </b-row>
@@ -19,24 +19,13 @@
 </template>
 
 <script>
-import { GET_LearningunitById } from "../queries"
+import { mapGetters } from "vuex";
 
 export default {
     name: "Content",
-    apollo: {
-        learningunit: {
-            //graphql query
-            query: GET_LearningunitById,
-            error(error) {
-                this.error = JSON.stringify(error.message)
-            }
-        }
-    },
-    data() {
-        return {
-        learningunit: [], // its from learningunitById
-        error: null
-        }
+    computed: {
+        ...mapGetters(["learningunitById"]),
+        ...mapGetters(["learningunits"])
     },
 }
 </script>
