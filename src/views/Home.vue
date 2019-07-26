@@ -19,6 +19,12 @@ import learningunitById from '@/modules/learningunitById'
 export default {
   name: "app",
   store,
+  props: {
+    mcId: {
+      type: [String, Number],
+      default: null
+    }
+  },
   components: {
     Header,
     Content,

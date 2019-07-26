@@ -1,20 +1,33 @@
 import { gql } from "apollo-boost";
 
 /* Learningunits Queries */
+// export const GET_Learningunits = gql`
+//   query {
+//     showallLearningunits(filter: FilterInput) {
+//       showallLearningunits(filter: $filter){
+//         id
+//         title
+//         mc
+//         url
+//         description
+//         createdAt
+//         updatedAt
+//       }
+//     }
+//   }
+// `;
 export const GET_Learningunits = gql`
-  query {
-    showallLearningunits (filter: {
-      limit: 2
-    }) {
-      id
-      title
-      mc
-      url
-      description
-      createdAt
-      updatedAt
+  query showallLearningunits($filter: FilterInput) {
+      showallLearningunits(filter: $filter){
+        id
+        title
+        mc
+        url
+        description
+        createdAt
+        updatedAt
+      }
     }
-  }
 `;
 
 /* QueryById */

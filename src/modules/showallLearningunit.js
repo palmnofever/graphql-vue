@@ -17,7 +17,12 @@ export default {
         showallLearningunits: ({ commit }) => {
         apolloClient
             .query({
-            query: GET_Learningunits
+                query: GET_Learningunits,
+                variables: {
+                    filter: {
+                        where: JSON.stringify({ mc: { eq: "061837cb-5ae1-4804-9d5d-37a7d2313c75" } })
+                    }
+                }
             })
             .then(({ data }) => {
             commit("setLearningunits", data.showallLearningunits);
